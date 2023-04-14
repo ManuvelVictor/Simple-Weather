@@ -1,6 +1,8 @@
 package com.victor.simpleweather.Models;
 
 public class MyLocation {
+    private static double longitude, latitude;
+
     public static double getLongitude() {
         return longitude;
     }
@@ -16,6 +18,4 @@ public class MyLocation {
     public static void setLatitude(double latitude) {
         MyLocation.latitude = latitude;
     }
-
-    public static double longitude, latitude;
 }

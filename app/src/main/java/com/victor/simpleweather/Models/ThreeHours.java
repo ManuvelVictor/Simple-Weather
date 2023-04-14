@@ -5,6 +5,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ThreeHours {
+    private long dt;
+    private float temp;
+    private float feels_like;
+
+    private float Humidity;
+    private String main;
+    private String description;
+    private String stringIcon;
+    private float wind_speed;
+    private float wind_direction;
+    private float pop;
+    private String sys;
+    private String dt_txt;
+    private Date date;
+    private String time, readableTime;
+
+    public float getHumidity() {
+        return Humidity;
+    }
+
+    public void setHumidity(float humidity) {
+        Humidity = humidity;
+    }
+
     public long getDt() {
         return dt;
     }
@@ -120,27 +144,5 @@ public class ThreeHours {
         return readableTime;
     }
 
-    public long dt;
-    public float temp;
-    public float feels_like;
 
-    public float getHumidity() {
-        return Humidity;
-    }
-
-    public void setHumidity(float humidity) {
-        Humidity = humidity;
-    }
-
-    public float Humidity;
-    public String main;
-    public String description;
-    public String stringIcon;
-    public float wind_speed;
-    public float wind_direction;
-    public float pop;
-    public String sys;
-    public String dt_txt;
-    public Date date;
-    public String time, readableTime;
 }

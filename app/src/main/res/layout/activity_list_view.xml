@@ -14,7 +14,8 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="@android:color/transparent"
         android:text="This text is not meant to be seen"
-        android:textColor="@color/white"
+        android:textColor="#9E9E9E"
+        android:padding="10dp"
         android:textSize="18sp" />
 
 </LinearLayout>

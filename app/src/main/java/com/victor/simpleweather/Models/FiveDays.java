@@ -1,6 +1,11 @@
 package com.victor.simpleweather.Models;
 
 public class FiveDays {
+
+    private OneDay[] days;
+    private long sunrise;
+    private long sunset;
+
     public OneDay[] getDays() {
         return days;
     }
@@ -24,8 +29,4 @@ public class FiveDays {
     public void setSunset(long sunset) {
         this.sunset = sunset;
     }
-
-    public OneDay[] days;
-    public long sunrise;
-    public long sunset;
 }

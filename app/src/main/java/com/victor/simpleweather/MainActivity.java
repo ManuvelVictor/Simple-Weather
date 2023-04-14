@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,6 +53,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements MyLocationTaskListener, MyWeatherTaskListener {
 
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
     int menuIndex;
     ProgressBar progressBar;
     ScrollView scrollView;
+    CardView cardView;
     RecyclerView rvToday, rvFiveDays;
     TodaysWeatherAdapter todaysWeatherAdapter;
     FiveDaysWeatherAdapter fiveDaysWeatherAdapter;
@@ -85,11 +88,11 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
         createDrawerMenuItems();
         //disable dark mode on user's phone
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
     }
 
     //Initialize Components
     private void initializeComponents() {
+        cardView = findViewById(R.id.cardView);
         progressBar = findViewById(R.id.progressBar);
         scrollView = findViewById(R.id.scrollView);
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView.bringToFront();//used for navigation listener
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
@@ -125,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
                 Intent intent = new Intent(getApplicationContext(), ActivityManage.class);
                 startActivity(intent);
             } else {
+                cardView.setVisibility(View.GONE);
                 scrollView.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 etLocation.setText(item.getTitle());
@@ -142,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
         //Give user keyboard a search button
         etLocation.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                cardView.setVisibility(View.GONE);
                 scrollView.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 getLocationFromSearch();
@@ -175,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
             String locationString = etLocation.getText().toString();
             String temp = lati + "," + longi;
             if (!isPreferencesExists(locationString)) {
-                sharedPref.edit().putString(locationString, temp).commit();
+                sharedPref.edit().putString(locationString, temp).apply();
                 createDrawerMenuItems();
             }
             loadWeatherData();
@@ -228,8 +233,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
                             //Get the user location
                             longi = location.getLongitude();
                             lati = location.getLatitude();
-                            LatLng userCoordinates = new LatLng(lati, longi);
-                            here = userCoordinates; //idk why I've declared so many variables and at this point I'm scared to remove any
+                            here = new LatLng(lati, longi); //idk why I've declared so many variables and at this point I'm scared to remove any
                             getLocationName();
                         });
             }
@@ -289,8 +293,8 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
             tvHumidity.setText(Integer.toString(temp) + "% humidity level");
             temp = Math.round(thisHour.getWind_speed() * 3.6f);
             tvWindSpeed.setText("Wind speed is " + temp + "km/hr");
-            tvSunrise.setText("Sunrise: " + getDTTOStringConversion(fiveDays.getSunrise()));
-            tvSunset.setText("Sunset: " + getDTTOStringConversion(fiveDays.getSunset()));
+            tvSunrise.setText("Sunrise: " + getDtToStringConversion(fiveDays.getSunrise()));
+            tvSunset.setText("Sunset: " + getDtToStringConversion(fiveDays.getSunset()));
             String imgUrl = "https://openweathermap.org/img/wn/" + thisHour.getStringIcon() + "@2x.png";
 
 
@@ -314,6 +318,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
 
             progressBar.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.VISIBLE);
 
         } else {
             Toast.makeText(this, "fiveDays is null", Toast.LENGTH_SHORT).show();
@@ -343,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
     }
 
     //Convert a long to Date format
-    private String getDTTOStringConversion(long dt) {
+    private String getDtToStringConversion(long dt) {
         dt = dt * 1000;
         Date time = new java.util.Date(dt);
         DateFormat dateFormat = new SimpleDateFormat("hh:mm aa ");//aa means am or pm
