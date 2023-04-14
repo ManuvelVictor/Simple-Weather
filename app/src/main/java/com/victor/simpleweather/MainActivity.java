@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -230,11 +231,16 @@ public class MainActivity extends AppCompatActivity implements MyLocationTaskLis
                     && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 fusedLocationProviderClient.getLastLocation()
                         .addOnSuccessListener(this, location -> {
-                            //Get the user location
-                            longi = location.getLongitude();
-                            lati = location.getLatitude();
-                            here = new LatLng(lati, longi); //idk why I've declared so many variables and at this point I'm scared to remove any
-                            getLocationName();
+                            if (location != null) {
+                                //Get the user location
+                                longi = location.getLongitude();
+                                lati = location.getLatitude();
+                                here = new LatLng(lati, longi); //idk why I've declared so many variables and at this point I'm scared to remove any
+                                getLocationName();
+                            } else {
+                                // Handle null location
+                                Log.e("TAG", "getLastLocation returned null");
+                            }
                         });
             }
         }
