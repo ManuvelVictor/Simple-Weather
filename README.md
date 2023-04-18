@@ -1,21 +1,24 @@
 # Simple-Weather
-This project is an Android application that provides a simple and intuitive user interface for Login and Signup features using Firebase Authentication. It offers the ability to authenticate users with email and password, as well as with Google Sign-In. The UI is designed with a modern and appealing Material Theme, and makes use of a CardView for the Login and Signup screens. The project also includes the use of external design tools such as Canva and Figma to create custom graphics and UI elements. Overall, this project is a great example of how to integrate Firebase Authentication and UI design into an Android application.
+This project is an Android application that provides a simple  weather app uses OpenWeather API to fetch and display weather data for different time intervals (five days, one day, and three hours). It includes a custom AsyncTask for retrieving the user's location and another custom AsyncTask for fetching weather data based on location and time. You have also implemented a Manage Location activity that allows the user to edit and remove locations from SharedPreferences. The app's UI is designed using Canva and Figma, with a scrollable main activity that displays weather details and a NavigationView on the left for displaying recent searched locations. Overall, your weather app is a functional and user-friendly tool for checking weather information.
 
 ## Tech Stack
 
 * Java
-* Firebase
+* Open Weather Api
 * Figma
 * Canva
 
 ## Lessons Learned
 
-* Integrated Firebase authentication with email and password for user login and signup.
-* Implemented Google Sign-In for allowing users to sign in with their Google account.
-* Worked with XML to create interfaces for login and signup within a CardView.
-* Utilized Material theme for designing the UI of the app.
-* Designed app UI using Canva and Figma, learning the basics of UI/UX design.
-* Improved my understanding of app development and how to implement secure user authentication.
+* Gained knowledge about how to use OpenWeather API and fetch weather data based on location and time.
+* Gained experience in using the NavigationView to create a side drawer menu that displays recent searched locations.
+* Gained experience in creating a scrollable UI with the help of the ScrollView widget in Android.
+* Gained experience in managing location data by implementing the Manage Location activity, allowing the user to edit and remove locations from the SharedPreferences.
+* Learned how to use external tools like Canva and Figma to design a UI for the app.
+* Learned how to make REST API calls and parse JSON data using JSON parser and JSON fetcher library in Android.
+* Learned how to use SharedPreferences to store and retrieve data persistently in Android.
+* Learned how to use AsyncTask to perform background tasks and update the UI thread with results.
+* Gained knowledge about creating a custom AsyncTask to retrieve user's location.
 
 ## Screenshots
 
