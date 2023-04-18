@@ -18,3 +18,5 @@ This project is an Android application that provides a simple and intuitive user
 * Improved my understanding of app development and how to implement secure user authentication.
 
 ## Screenshots
+
+[Simple Weather App Recording.webm](https://user-images.githubusercontent.com/81816979/232896437-3fc252b2-6cfb-4e4a-8890-2e48c8aae676.webm)
