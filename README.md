@@ -20,6 +20,6 @@ This project is an Android application used to show the weather with a pleasent 
 * Learned how to use AsyncTask to perform background tasks and update the UI thread with results.
 * Gained knowledge about creating a custom AsyncTask to retrieve user's location.
 
-## Screenshots
+## Recording
 
 [Simple Weather App Recording.webm](https://user-images.githubusercontent.com/81816979/232896437-3fc252b2-6cfb-4e4a-8890-2e48c8aae676.webm)
